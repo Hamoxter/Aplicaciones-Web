@@ -1,0 +1,128 @@
+
+/* Configuración general de la página */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 30px;
+}
+
+
+
+/* Contenedor principal */
+
+.contenedor {
+    max-width: 900px;
+    margin: auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+
+/* Encabezado con los datos personales */
+
+.encabezado {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding-bottom: 25px;
+    border-bottom: 2px solid #ddd;
+}
+
+
+/* Fotografía */
+
+.foto {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+
+/* Datos personales */
+
+.datos-personales h1 {
+    margin-bottom: 5px;
+}
+
+.datos-personales p {
+    margin: 7px 0;
+}
+
+
+/* Secciones */
+
+.seccion {
+    margin-top: 25px;
+}
+
+.seccion h2 {
+    border-bottom: 2px solid #333;
+    padding-bottom: 8px;
+}
+
+
+/* Listas */
+
+li {
+    margin-bottom: 10px;
+}
+
+
+/* Experiencia laboral */
+
+.experiencia {
+    margin-bottom: 20px;
+}
+
+.experiencia h3 {
+    margin-bottom: 5px;
+}
+
+
+/* Tabla de referencias */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th,
+td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #eeeeee;
+}
+
+
+/* Adaptación para pantallas pequeñas */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 10px;
+    }
+
+    .encabezado {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    th,
+    td {
+        padding: 7px;
+    }
+}
+
