@@ -4,102 +4,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Hoja de Vida - Elian Erazo</title>
 
-    <!-- Enlace a la hoja de estilos CSS -->
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-
-
-
-
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- Contenedor principal -->
-    <div class="contenedor">
+    <main class="contenedor">
 
-        <!-- Datos personales -->
-        <div class="encabezado">
+        <header class="encabezado">
 
-            <img src="{% static 'fotico.jpeg' %}" alt="Foto personal" class="foto">
+            <img src="fotico.jpeg" alt="Foto personal" class="foto">
 
             <div class="datos-personales">
                 <h1>Elian Stephano Erazo Fierro</h1>
+
                 <p>Estudiante de Ingeniería en Software</p>
-                <p><strong>Correo:</strong> e2350037012@live.uleam.edu.ec</p>
-                <p><strong>Teléfono:</strong> 097 955 9501</p>
-                <p><strong>Ubicación:</strong> Manta, Ecuador</p>
+
+                <p>
+                    <strong>Correo:</strong>
+                    e2350037012@live.uleam.edu.ec
+                </p>
+
+                <p>
+                    <strong>Teléfono:</strong>
+                    097 955 9501
+                </p>
+
+                <p>
+                    <strong>Ubicación:</strong>
+                    Manta, Ecuador
+                </p>
             </div>
 
-        </div>
+        </header>
 
-
-        <!-- Perfil personal -->
-        <div class="Perfil">
-
+        <section class="seccion">
             <h2>Perfil Personal</h2>
 
             <p>
-                Estudiante de Ingeniería en software, responsable y comprometido en el desarrollo de software, videojuegos y aplicaciones web
+                Estudiante de Ingeniería en Software, responsable y
+                comprometido con el desarrollo de software, videojuegos
+                y aplicaciones web.
             </p>
+        </section>
 
-        </div>
-
-
-        <!-- Estudios realizados -->
-        <div class="Estudios">
-
+        <section class="seccion">
             <h2>Estudios Realizados</h2>
 
             <ul>
                 <li>
-                    <strong>Ingeniería en Software</strong>
-                    <br>
+                    <strong>Ingeniería en Software</strong><br>
                     Universidad Laica Eloy Alfaro de Manabí
                 </li>
 
                 <li>
-                    <strong>Bachillerato General Unificado</strong>
-                    <br>
+                    <strong>Bachillerato General Unificado</strong><br>
                     Unidad Educativa FAE #4 Manta
                 </li>
             </ul>
+        </section>
 
-        </div>
-
-
-        <!-- Experiencia laboral -->
-        <div class="experiencia">
-
+        <section class="seccion">
             <h2>Experiencia Laboral</h2>
 
             <div class="experiencia">
                 <h3>Soporte y Desarrollo Junior</h3>
 
                 <p>
-                    Asistencia en la programacion de nuevas funciones,
-                    correción de errores en sistemas y soporte técnico
-                    en el despliegue de software
+                    Asistencia en la programación de nuevas funciones,
+                    corrección de errores en sistemas y soporte técnico
+                    en el despliegue de software.
                 </p>
             </div>
 
-            <div class="proyecto">
+            <div class="experiencia">
                 <h3>Proyecto Personal</h3>
 
                 <p>
-                    Programacion de mecanicas de juego, 
-                    lógica de personajes y correción de errores
-                    en entornos de desarrollo interactivos
+                    Programación de mecánicas de juego, lógica de
+                    personajes y corrección de errores en entornos
+                    de desarrollo interactivos.
                 </p>
             </div>
+        </section>
 
-        </div>
-
-
-        <!-- Capacitaciones -->
-        <div class="capacitaciones">
-
+        <section class="seccion">
             <h2>Capacitaciones</h2>
 
             <ul>
@@ -110,50 +102,48 @@
                 <li>Bases de datos SQL</li>
                 <li>Desarrollo de aplicaciones web</li>
             </ul>
+        </section>
 
-        </div>
-
-
-        <!-- Referencias personales -->
-        <div class="r-personales">
-
+        <section class="seccion">
             <h2>Referencias Personales</h2>
 
             <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Cargo / Profesión</th>
+                        <th>Teléfono</th>
+                        <th>Correo electrónico</th>
+                    </tr>
+                </thead>
 
-                <tr>
-                    <th>Nombre</th>
-                    <th>Cargo / Profesión</th>
-                    <th>Teléfono</th>
-                    <th>Correo electrónico</th>
-                </tr>
+                <tbody>
+                    <tr>
+                        <td>Andrés Pico</td>
+                        <td>Ingeniero en Sistemas</td>
+                        <td>098 111 2233</td>
+                        <td>andres.peak@email.com</td>
+                    </tr>
 
-                <tr>
-                    <td>Andrés Pico</td>
-                    <td>Ingeniero en Sistemas</td>
-                    <td>098 111 2233</td>
-                    <td>andres.peak@email.com</td>
-                </tr>
+                    <tr>
+                        <td>Ruber Naranjo</td>
+                        <td>Administrador</td>
+                        <td>098 222 3344</td>
+                        <td>ruber.naranjo@email.com</td>
+                    </tr>
 
-                <tr>
-                    <td>Ruber naranjo</td>
-                    <td>Administrador</td>
-                    <td>098 222 3344</td>
-                    <td>ruber.naranjo@email.com</td>
-                </tr>
-
-                <tr>
-                    <td>Jefferson Moreira</td>
-                    <td>Docente</td>
-                    <td>098 333 4455</td>
-                    <td>jeff.moreira@email.com</td>
-                </tr>
-
+                    <tr>
+                        <td>Jefferson Moreira</td>
+                        <td>Docente</td>
+                        <td>098 333 4455</td>
+                        <td>jeff.moreira@email.com</td>
+                    </tr>
+                </tbody>
             </table>
+        </section>
 
-        </div>
-
-    </div>
+    </main>
 
 </body>
+
 </html>
