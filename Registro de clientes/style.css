@@ -1,0 +1,38 @@
+body {
+font-family: Arial, sans-serif;
+background-color: #e8f0fe;
+margin: 0;
+padding: 50px;
+}
+
+.contenedor {
+width: 400px;
+margin: auto;
+background-color: white;
+padding: 30px;
+border-radius: 10px;
+}
+
+h1 {
+text-align: center;
+color: #1e3c72;
+}
+
+label {
+display: block;
+margin-top: 15px;
+margin-bottom: 5px;
+font-weight: bold;
+}
+
+input {
+width: 100%;
+padding: 10px;
+box-sizing: border-box;
+}
+
+button {
+margin-top: 20px;
+padding: 10px 20px;
+cursor: pointer;
+}
