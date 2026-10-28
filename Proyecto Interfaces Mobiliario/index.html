@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de mobiliario ULEAM</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Inicio de sesión -->
+    <section id="inicioSesion" class="pantalla-inicio-sesion">
+        <form id="formularioInicioSesion" class="tarjeta-inicio-sesion">
+            <div>
+                <h1>Iniciar sesión</h1>
+                <p class="texto-secundario">Sistema de gestión de mobiliario</p>
+
+                <label for="correo">Correo electrónico</label>
+                <input id="correo" type="email" placeholder="usuario@uleam.edu.ec" required>
+
+                <label for="contrasena">Contraseña</label>
+                <input id="contrasena" type="password" placeholder="Ingrese su contraseña" required>
+
+                <button class="boton principal ancho-completo" type="submit">
+                    Iniciar sesión
+                </button>
+            </div>
+
+            <div class="uleam">
+                <img src="https://www.uleam.edu.ec/wp-content/uploads/2012/09/LOGO-ULEAM.png"
+                     width="240" height="160" alt="Logotipo de la ULEAM">
+            </div>
+        </form>
+    </section>
+
+    <!-- Sistema principal -->
+    <div id="sistema" class="sistema oculto">
+
+        <aside class="menu-lateral">
+            <div class="marca">
+                <span class="icono-marca">U</span>
+                <span>ULEAM<br><small>Mobiliario</small></span>
+            </div>
+
+            <nav>
+                <button class="enlace-menu activo" data-pantalla="inicio">⌂ Inicio</button>
+                <button class="enlace-menu" data-pantalla="inventario">▣ Inventario</button>
+                <button class="enlace-menu" data-pantalla="ubicaciones">⌖ Ubicaciones</button>
+                <button class="enlace-menu" data-pantalla="responsables">♙ Responsables</button>
+                <button class="enlace-menu" data-pantalla="movimientos">⇄ Movimientos</button>
+                <button class="enlace-menu" data-pantalla="estados">◉ Estados</button>
+                <button class="enlace-menu" data-pantalla="reportes">▤ Reportes</button>
+                <button class="enlace-menu" id="salir">⇥ Salir</button>
+            </nav>
+        </aside>
+
+        <main class="area-principal">
+            <header class="barra-superior">
+                <h2 id="tituloPantalla">Panel principal</h2>
+                <span class="etiqueta-usuario">
+                    ● <span id="usuarioActual">Administrador</span>
+                </span>
+            </header>
+
+            <div class="contenido">
+
+                <!-- Inicio -->
+                <section class="pantalla activo" id="pantalla-inicio">
+                    <div class="encabezado-seccion">
+                        <div>
+                            <h3>Resumen general</h3>
+                            <p class="texto-secundario">Vista rápida del mobiliario</p>
+                        </div>
+                        <span id="fechaDeHoy" class="texto-secundario"></span>
+                    </div>
+
+                    <div class="rejilla-estadisticas">
+                        <article class="tarjeta-estadistica">
+                            <span class="icono-estadistica">▣</span>
+                            <div><p>Total de mobiliario</p><strong id="totalMuebles">0</strong></div>
+                        </article>
+
+                        <article class="tarjeta-estadistica">
+                            <span class="icono-estadistica verde">✓</span>
+                            <div><p>Disponibles</p><strong id="mueblesDisponibles">0</strong></div>
+                        </article>
+
+                        <article class="tarjeta-estadistica">
+                            <span class="icono-estadistica azul">♙</span>
+                            <div><p>Asignados</p><strong id="mueblesAsignados">0</strong></div>
+                        </article>
+
+                        <article class="tarjeta-estadistica">
+                            <span class="icono-estadistica naranja">⚒</span>
+                            <div><p>En mantenimiento</p><strong id="mueblesEnMantenimiento">0</strong></div>
+                        </article>
+                    </div>
+
+                    <div class="encabezado-seccion">
+                        <div>
+                            <h3>Últimos movimientos</h3>
+                            <p class="texto-secundario">Historial de traslados y cambios</p>
+                        </div>
+                        <button class="boton contorno" data-ir="movimientos">Ver todos</button>
+                    </div>
+
+                    <div class="contenedor-tabla">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Mobiliario</th>
+                                    <th>Ubicación actual</th>
+                                    <th>Motivo</th>
+                                    <th>Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody id="movimientosRecientes"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Inventario -->
+                <section class="pantalla" id="pantalla-inventario">
+                    <div class="encabezado-seccion">
+                        <div>
+                            <h3>Inventario de mobiliario</h3>
+                            <p class="texto-secundario">Consulta y registra los muebles</p>
+                        </div>
+                        <button class="boton principal" id="mostrarFormularioMueble">
+                            ＋ Registrar mobiliario
+                        </button>
+                    </div>
+
+                    <div class="filtros">
+                        <input id="buscarInventario" type="search" placeholder="Buscar por código o nombre">
+
+                        <select id="filtroTipoMueble">
+                            <option value="">Todas las categorías</option>
+                            <option>Silla</option>
+                            <option>Escritorio</option>
+                            <option>Mesa</option>
+                            <option>Máquina</option>
+                            <option>Archivador</option>
+                            <option>Computador</option>
+                            <option>Estantería</option>
+                        </select>
+
+                        <select id="filtroEstadoMueble">
+                            <option value="">Todos los estados</option>
+                            <option>Disponible</option>
+                            <option>Asignado</option>
+                            <option>En mantenimiento</option>
+                            <option>De baja</option>
+                        </select>
+                    </div>
+
+                    <div id="panelFormularioMueble" class="panel-formulario oculto">
+                        <h3>Registrar mobiliario</h3>
+
+                        <form id="formularioMueble" class="rejilla-formulario">
+                            <label>Código
+                                <input id="codigoMueble" required placeholder="MOB-009">
+                            </label>
+
+                            <label>Nombre
+                                <input id="nombreMueble" required placeholder="Silla operativa">
+                            </label>
+
+                            <label>Tipo
+                                <select id="tipoMueble">
+                                    <option>Silla</option>
+                                    <option>Escritorio</option>
+                                    <option>Mesa</option>
+                                    <option>Máquina</option>
+                                    <option>Archivador</option>
+                                    <option>Computador</option>
+                                    <option>Estantería</option>
+                                </select>
+                            </label>
+
+                            <label>Estado
+                                <select id="estadoMueble">
+                                    <option>Disponible</option>
+                                    <option>Asignado</option>
+                                    <option>En mantenimiento</option>
+                                    <option>De baja</option>
+                                </select>
+                            </label>
+
+                            <label>Ubicación
+                                <select id="ubicacionMueble"></select>
+                            </label>
+
+                            <label>Responsable
+                                <select id="responsableMueble"></select>
+                            </label>
+
+                            <label class="dos-columnas">Descripción
+                                <textarea id="descripcionMueble" rows="2" placeholder="Descripción breve (opcional)"></textarea>
+                            </label>
+
+                            <div class="acciones-formulario dos-columnas">
+                                <button class="boton exito" type="submit">Registrar</button>
+                                <button class="boton peligro" type="button" id="cancelarMueble">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="tarjetasInventario" class="rejilla-muebles"></div>
+                </section>
+
+                <!-- Ubicaciones -->
+                <section class="pantalla" id="pantalla-ubicaciones">
+                    <div class="encabezado-seccion">
+                        <div>
+                            <h3>Ubicaciones</h3>
+                            <p class="texto-secundario">Espacios donde se encuentra el mobiliario.</p>
+                        </div>
+                        <button class="boton principal" id="mostrarFormularioUbicacion">
+                            ＋ Agregar ubicación
+                        </button>
+                    </div>
+
+                    <div id="panelFormularioUbicacion" class="panel-formulario oculto">
+                        <form id="formularioUbicacion" class="formulario-en-linea">
+                            <label>Nombre
+                                <input id="nombreUbicacion" required placeholder="Ej. Aula 201">
+                            </label>
+
+                            <label>Facultad o bloque
+                                <input id="bloqueUbicacion" required placeholder="Ej. FCVT - Bloque 10">
+                            </label>
+
+                            <button class="boton exito" type="submit">Agregar</button>
+                            <button class="boton peligro" type="button" id="cancelarUbicacion">Cancelar</button>
+                        </form>
+                    </div>
+
+                    <div id="rejillaUbicaciones" class="rejilla-ubicaciones"></div>
+                </section>
+
+                <!-- Responsables -->
+                <section class="pantalla" id="pantalla-responsables">
+                    <div class="encabezado-seccion">
+                        <div>
+                            <h3>Responsables</h3>
+                            <p class="texto-secundario">Personal encargado del mobiliario.</p>
+                        </div>
+                        <button class="boton principal" id="mostrarFormularioResponsable">
+                            ＋ Agregar responsable
+                        </button>
+                    </div>
+
+                    <div id="panelFormularioResponsable" class="panel-formulario oculto">
+                        <form id="formularioResponsable" class="rejilla-formulario">
+                            <label>Nombre completo
+                                <input id="nombreResponsable" required>
+                            </label>
+
+                            <label>Rol o cargo
+                                <input id="cargoResponsable" required placeholder="Técnico de mantenimiento">
+                            </label>
+
+                            <label>Contacto
+                                <input id="contactoResponsable" required placeholder="Teléfono o correo">
+                            </label>
+
+                            <label>Facultad
+                                <input id="facultadResponsable" required>
+                            </label>
+
+                            <div class="acciones-formulario dos-columnas">
+                                <button class="boton exito" type="submit">Agregar</button>
+                                <button class="boton peligro" type="button" id="cancelarResponsable">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="tarjetasResponsables" class="rejilla-responsables"></div>
+                </section>
+
+                <!-- Movimientos -->
+                <section class="pantalla" id="pantalla-movimientos">
+                    <div class="encabezado-seccion">
+                        <div>
+                            <h3>Movimientos</h3>
+                            <p class="texto-secundario">Historial de traslados de mobiliario</p>
+                        </div>
+                        <button class="boton principal" id="mostrarFormularioMovimiento">
+                            ＋ Realizar movimiento
+                        </button>
+                    </div>
+
+                    <div id="panelFormularioMovimiento" class="panel-formulario oculto">
+                        <h3>Registrar movimiento</h3>
+
+                        <form id="formularioMovimiento" class="rejilla-formulario">
+                            <label>Mobiliario
+                                <select id="muebleMovimiento" required></select>
+                            </label>
+
+                            <label>Ubicación inicial
+                                <input id="origenMovimiento" readonly>
+                            </label>
+
+                            <label>Destino
+                                <select id="destinoMovimiento" required></select>
+                            </label>
+
+                            <label>Responsable
+                                <select id="responsableMovimiento" required></select>
+                            </label>
+
+                            <label>Motivo
+                                <select id="motivoMovimiento">
+                                    <option>Traslado</option>
+                                    <option>Reubicación</option>
+                                    <option>Asignación</option>
+                                    <option>Retiro</option>
+                                    <option>Mantenimiento</option>
+                                </select>
+                            </label>
+
+                            <label>Fecha
+                                <input type="date" id="fechaMovimiento" required>
+                            </label>
+
+                            <label class="dos-columnas">Detalle
+                                <textarea id="detalleMovimiento" rows="2" placeholder="Detalle opcional"></textarea>
+                            </label>
+
+                            <div class="acciones-formulario dos-columnas">
+                                <button class="boton exito" type="submit">Registrar movimiento</button>
+                                <button class="boton peligro" type="button" id="cancelarMovimiento">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="contenedor-tabla">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Código</th>
+                                    <th>Mobiliario</th>
+                                    <th>Ubicación inicial</th>
+                                    <th>Ubicación actual</th>
+                                    <th>Motivo</th>
+                                    <th>Responsable</th>
+                                    <th>Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaMovimientos"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Estados -->
+                <section class="pantalla" id="pantalla-estados">
+                    <div class="encabezado-seccion">
+                        <div>
+                            <h3>Estados del mobiliario</h3>
+                            <p class="texto-secundario">Registra la razón y el responsable de cada cambio.</p>
+                        </div>
+                        <button class="boton principal" id="mostrarFormularioCambioEstado">
+                            ＋ Cambiar estado
+                        </button>
+                    </div>
+
+                    <div class="rejilla-estadisticas">
+                        <article class="tarjeta-estadistica">
+                            <span class="icono-estadistica verde">✓</span>
+                            <div><p>Disponibles</p><strong id="conteoDisponiblesEstados">0</strong></div>
+                        </article>
+
+                        <article class="tarjeta-estadistica">
+                            <span class="icono-estadistica azul">♙</span>
+                            <div><p>Asignados</p><strong id="conteoAsignadosEstados">0</strong></div>
+                        </article>
+
+                        <article class="tarjeta-estadistica">
+                            <span class="icono-estadistica naranja">⚒</span>
+                            <div><p>En mantenimiento</p><strong id="conteoMantenimientoEstados">0</strong></div>
+                        </article>
+
+                        <article class="tarjeta-estadistica">
+                            <span class="icono-estadistica">×</span>
+                            <div><p>De baja</p><strong id="conteoBajaEstados">0</strong></div>
+                        </article>
+                    </div>
+
+                    <div id="panelFormularioEstado" class="panel-formulario oculto">
+                        <h3>Registrar cambio de estado</h3>
+
+                        <form id="formularioEstado" class="rejilla-formulario">
+                            <label>Mueble
+                                <select id="muebleEstado" required></select>
+                            </label>
+
+                            <label>Estado actual
+                                <input id="estadoActualMueble" readonly>
+                            </label>
+
+                            <label>Nuevo estado
+                                <select id="nuevoEstadoMueble" required>
+                                    <option>Disponible</option>
+                                    <option>Asignado</option>
+                                    <option>En mantenimiento</option>
+                                    <option>De baja</option>
+                                </select>
+                            </label>
+
+                            <label>Responsable
+                                <select id="responsableEstado" required></select>
+                            </label>
+
+                            <label>Razón
+                                <select id="motivoEstado" required>
+                                    <option value="">Seleccione una razón</option>
+                                    <option>Deterioro o daño</option>
+                                    <option>Reparación completada</option>
+                                    <option>Asignación a un área</option>
+                                    <option>Devolución a bodega</option>
+                                    <option>Baja definitiva</option>
+                                    <option>Inspección técnica</option>
+                                    <option>Otro</option>
+                                </select>
+                            </label>
+
+                            <label>Fecha
+                                <input id="fechaCambioEstado" type="date" required>
+                            </label>
+
+                            <label class="dos-columnas">Observaciones
+                                <textarea id="observacionesEstado" rows="2" placeholder="Daño encontrado o trabajo realizado"></textarea>
+                            </label>
+
+                            <div class="acciones-formulario dos-columnas">
+                                <button class="boton exito" type="submit">Actualizar estado</button>
+                                <button class="boton peligro" type="button" id="cancelarCambioEstado">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="filtros filtros-estados">
+                        <input id="buscarHistorialEstados" type="search" placeholder="Buscar por código o mueble">
+
+                        <select id="filtroNuevoEstado">
+                            <option value="">Todos los estados nuevos</option>
+                            <option>Disponible</option>
+                            <option>Asignado</option>
+                            <option>En mantenimiento</option>
+                            <option>De baja</option>
+                        </select>
+                    </div>
+
+                    <h3 class="subtitulo-seccion">Historial de cambios de estado</h3>
+
+                    <div class="contenedor-tabla">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Mueble</th>
+                                    <th>Estado anterior</th>
+                                    <th>Estado nuevo</th>
+                                    <th>Razón</th>
+                                    <th>Responsable</th>
+                                    <th>Fecha</th>
+                                    <th>Observaciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaHistorialEstados"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Reportes -->
+                <section class="pantalla" id="pantalla-reportes">
+                    <div class="encabezado-seccion">
+                        <div>
+                            <h3>Reportes</h3>
+                            <p class="texto-secundario">Consulta el resumen y el historial de reportes creados.</p>
+                        </div>
+                        <button class="boton principal" id="mostrarFormularioReporte">
+                            ＋ Generar reporte
+                        </button>
+                    </div>
+
+                    <div id="panelFormularioReporte" class="panel-formulario oculto">
+                        <h3>Configurar reporte</h3>
+
+                        <form id="formularioReporte" class="rejilla-formulario">
+                            <label>Tipo
+                                <select id="tipoReporte">
+                                    <option>Inventario general</option>
+                                    <option>Movimientos de mobiliario</option>
+                                    <option>Mobiliario por ubicación</option>
+                                    <option>Mobiliario en mantenimiento</option>
+                                    <option>Mobiliario asignado</option>
+                                    <option>Mobiliario en mal estado</option>
+                                </select>
+                            </label>
+
+                            <label>Ubicación
+                                <select id="ubicacionReporte"></select>
+                            </label>
+
+                            <label>Estado
+                                <select id="estadoReporte">
+                                    <option>Todos</option>
+                                    <option>Disponible</option>
+                                    <option>Asignado</option>
+                                    <option>En mantenimiento</option>
+                                    <option>De baja</option>
+                                </select>
+                            </label>
+
+                            <div class="acciones-formulario dos-columnas">
+                                <button class="boton exito" type="submit">Generar</button>
+                                <button class="boton peligro" type="button" id="cancelarReporte">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    
+                    <div class="resumen-reportes oculto">
+                        <h3>Resumen del reporte</h3>
+                        <div class="elementos-resumen">
+                            <span id="totalReporte"></span>
+                            <span id="disponiblesReporte"></span>
+                            <span id="asignadosReporte"></span>
+                            <span id="mantenimientoReporte"></span>
+                        </div>
+                    </div>
+
+
+                    <h3 class="subtitulo-seccion">Historial de reportes</h3>
+
+                    <div class="contenedor-tabla">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Código</th>
+                                    <th>Tipo de reporte</th>
+                                    <th>Ubicación</th>
+                                    <th>Estado</th>
+                                    <th>Fecha</th>
+                                    <th>Generado por</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaReportes"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <div id="mensaje-emergente" class="mensaje-emergente"></div>
+    <script src="script.js"></script>
+</body>
+</html>
